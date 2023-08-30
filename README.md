@@ -16,9 +16,10 @@ git clone https://github.com/im-javad/faramoj-test.git
 ```
 npm install
 ```
-- 
 
 ## With Webpack 
+
+### Developing 
 
 - Enter the following command for development and ....
 
@@ -27,6 +28,7 @@ npm start
 ```
 - Open in browser http://192.168.1.105:7777/
 
+### Building & Production
 - Enter the following command for production and build
 
 ```
