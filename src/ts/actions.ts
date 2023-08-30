@@ -1,4 +1,5 @@
-import { desInput, tasks, titleInput } from "./events";
+import { desInput, titleInput } from "./elements";
+import { tasks } from "./events";
 import { Task, compileTasks } from "./helper";
 
 /**
@@ -28,7 +29,22 @@ export const addTask = (title: string, description: string): void => {
  *
  * @param tasks
  */
-const addToSessionStorage = (tasks: Task[]): void => {
+export const addToSessionStorage = (tasks: Task[]): void => {
   sessionStorage.setItem("TASKS", JSON.stringify(tasks));
   compileTasks(tasks);
+};
+
+/**
+ * Task status update and updated time setting
+ *
+ * @param id
+ */
+export const toggle = (id: string) => {
+  tasks.forEach((task: Task) => {
+    if (task.id == id) {
+      task.completed = !task.completed;
+      task.lastUpdateAt = new Date();
+    }
+  });
+  addToSessionStorage(tasks);
 };

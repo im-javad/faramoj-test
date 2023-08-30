@@ -1,14 +1,7 @@
-import { addTask } from "./actions";
+import { addTask, addToSessionStorage, toggle } from "./actions";
 import { Task, compileTasks } from "./helper";
 import "../css/style.css";
-
-export const list = document.querySelector<HTMLUListElement>(".list-items");
-const form = document.querySelector<HTMLFormElement>("#add-new-task-form");
-export const titleInput =
-  document.querySelector<HTMLInputElement>("#new-task-title");
-export const desInput = document.querySelector<HTMLInputElement>(
-  "#new-task-description"
-);
+import { desInput, form, list, titleInput } from "./elements";
 
 /**
  * Store tasks across the app
@@ -16,7 +9,7 @@ export const desInput = document.querySelector<HTMLInputElement>(
 export let tasks: Task[] = [];
 
 /**
- * Submit the form and add a new task to the program 
+ * Submit the form and add a new task to the program
  */
 form?.addEventListener("submit", (e: Event) => {
   e.preventDefault();
@@ -33,7 +26,25 @@ form?.addEventListener("submit", (e: Event) => {
 });
 
 /**
- * Adding tasks from session storage to the program and re-rendering 
+ * Event logging for task completion or deletion
+ */
+list?.addEventListener("click", (e) => {
+  if ((e.target as HTMLTextAreaElement).type === "checkbox") {
+    const id = (
+      e.target as HTMLTextAreaElement
+    ).parentElement?.parentElement?.getAttribute("item-key");
+    if (id) toggle(id);
+  }
+  if ((e.target as HTMLTextAreaElement).classList.contains("item-remove")) {
+    const id = (
+      e.target as HTMLTextAreaElement
+    ).parentElement?.parentElement?.getAttribute("item-key");
+    if (id) removeTask(id);
+  }
+});
+
+/**
+ * Adding tasks from session storage to the program and re-rendering
  */
 const getSessionStorageTasks = (): void => {
   const receivedTasks = sessionStorage.getItem("TASKS");
@@ -44,6 +55,18 @@ const getSessionStorageTasks = (): void => {
 };
 
 /**
- * Adding tasks to the program from the storage session and calling the desired function 
+ * Adding tasks to the program from the storage session and calling the desired function
  */
 getSessionStorageTasks;
+
+/**
+ * Removing task from page and session storage
+ *
+ * @param id
+ */
+const removeTask = (id: string) => {
+  tasks = tasks.filter((task) => {
+    return task.id != id;
+  });
+  addToSessionStorage(tasks);
+};

@@ -1,4 +1,4 @@
-import { list } from "./events";
+import { list } from "./elements";
 
 /**
  * For all of tasks
@@ -78,3 +78,4 @@ export const compileTasks = (tasks: Task[]): void => {
     renderTask(task);
   });
 };
+
