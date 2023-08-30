@@ -39,7 +39,7 @@ export const addToSessionStorage = (tasks: Task[]): void => {
  *
  * @param id
  */
-export const toggle = (id: string) => {
+export const toggle = (id: string) : void => {
   tasks.forEach((task: Task) => {
     if (task.id == id) {
       task.completed = !task.completed;

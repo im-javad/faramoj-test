@@ -16,6 +16,7 @@ git clone https://github.com/im-javad/faramoj-test.git
 ```
 npm install
 ```
+- 
 
 ## With Webpack 
 
@@ -24,9 +25,11 @@ npm install
 ```
 npm start
 ```
+- Open in browser http://192.168.1.105:7777/
 
 - Enter the following command for production and build
 
 ```
 npm run build
 ```
+- Check the `output` file and view the files

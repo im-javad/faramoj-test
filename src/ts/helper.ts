@@ -17,7 +17,7 @@ export type Task = {
  *
  * @param task
  */
-export const renderTask = (task: Task) => {
+export const renderTask = (task: Task) : void => {
   const checked = task.completed ? "checked" : null;
 
   const item = document.createElement("li");

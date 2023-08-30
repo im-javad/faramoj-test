@@ -28,7 +28,7 @@ form?.addEventListener("submit", (e: Event) => {
 /**
  * Event logging for task completion or deletion
  */
-list?.addEventListener("click", (e) => {
+list?.addEventListener("click", (e: Event) => {
   if ((e.target as HTMLTextAreaElement).type === "checkbox") {
     const id = (
       e.target as HTMLTextAreaElement
